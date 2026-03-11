@@ -39,6 +39,6 @@ your Odoo environment is correctly configured to run custom addons.
         'views/calima_test_views.xml',
     ],
     'installable': True,
-    'application': False,
+    'application': True,
     'auto_install': False,
 }

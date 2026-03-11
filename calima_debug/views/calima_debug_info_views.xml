@@ -61,11 +61,12 @@
               name="Calima Debug"
               sequence="100"/>
 
-    <!-- System Info menu item -->
+    <!-- System Info menu item — restricted to system administrators -->
     <menuitem id="calima_debug_menu_info"
               name="System Info"
               parent="calima_debug_menu_root"
               action="calima_debug_info_action"
+              groups="base.group_system"
               sequence="10"/>
 
 </odoo>
