@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- List view -->
+    <record id="calima_test_view_list" model="ir.ui.view">
+        <field name="name">calima.test.list</field>
+        <field name="model">calima.test</field>
+        <field name="arch" type="xml">
+            <list string="Calima Test Records">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view -->
+    <record id="calima_test_view_form" model="ir.ui.view">
+        <field name="name">calima.test.form</field>
+        <field name="model">calima.test</field>
+        <field name="arch" type="xml">
+            <form string="Calima Test Record">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="calima_test_action" model="ir.actions.act_window">
+        <field name="name">Calima Test Records</field>
+        <field name="res_model">calima.test</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first test record!
+            </p>
+            <p>
+                If you can see this page and create records, your Odoo addon
+                setup is working correctly.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="calima_test_menu_root"
+              name="Calima Test"
+              sequence="100"/>
+
+    <menuitem id="calima_test_menu_records"
+              name="Test Records"
+              parent="calima_test_menu_root"
+              action="calima_test_action"
+              sequence="10"/>
+
+</odoo>
