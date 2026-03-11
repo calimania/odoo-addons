@@ -66,8 +66,10 @@ confirm the ORM and database write layer work end-to-end.
 
 | Odoo version | Status |
 |---|---|
-| 17.0 | ✅ Supported |
-| 16.0 | Should work (update `version` prefix in `__manifest__.py` to `16.0`) |
+| 19.0 | ✅ Supported |
+| 18.0 | ✅ Compatible — update `version` prefix in `__manifest__.py` to `18.0` |
+| 17.0 | ✅ Compatible — update `version` prefix in `__manifest__.py` to `17.0` |
+| 16.0 | ⚠️ Experimental — requires additional changes: use `<tree>` instead of `<list>` in views and `tree,form` in `view_mode`, and update `version` prefix to `16.0` |
 
 ## License
 

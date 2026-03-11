@@ -1,6 +1,6 @@
 {
     'name': 'Calima Debug',
-    'version': '17.0.1.0.0',
+    'version': '19.0.1.0.0',
     'summary': 'System information dashboard and installation validator for self-hosting administrators.',
     'description': """
 Calima Debug
