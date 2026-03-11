@@ -2,10 +2,10 @@ from odoo import fields, models
 
 
 class CalimaTest(models.Model):
-    """Minimal test model used to verify that addon loading works correctly."""
+    """Minimal test model used to verify that the ORM and DB write layer work."""
 
     _name = 'calima.test'
-    _description = 'Calima Test'
+    _description = 'Calima Debug – Test Record'
 
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')
