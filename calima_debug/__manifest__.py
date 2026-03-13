@@ -32,10 +32,11 @@ your Odoo environment is correctly configured to run custom addons.
     'website': 'https://github.com/calimania/odoo-addons',
     'category': 'Technical',
     'license': 'LGPL-3',
-    'depends': ['base'],
+    'depends': ['base', 'website', 'website_event'],
     'data': [
         'security/ir.model.access.csv',
         'views/calima_debug_info_views.xml',
+        'views/calima_debug_json_views.xml',
         'views/calima_test_views.xml',
     ],
     'installable': True,
