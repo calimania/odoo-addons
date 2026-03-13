@@ -27,6 +27,29 @@ of the more complex Calimania modules.
 
 All fields are read-only — no data is stored in the database.
 
+### System JSON view
+
+**Calima Debug → System JSON** opens a popup with a pretty JSON payload that
+summarizes runtime info and exposed API routes. This is useful for quick copy
+and share during integrations or support sessions.
+
+### Public events API
+
+This module now exposes two HTTP endpoints:
+
+- `GET /api/public/events`: paginated public events feed for website/client apps
+- `GET /api/public/events/debug`: debug payload with resolved website/company and filters
+
+Query params for `/api/public/events`:
+
+- `limit` (default `20`, max `100`)
+- `page` (default `1`)
+
+Debug endpoint controls:
+
+- Set `CALIMA_DEBUG_API=false` to disable debug endpoint
+- Set `CALIMA_DEBUG_TOKEN=<secret>` to require header `X-Calima-Debug-Token`
+
 ### Test Records
 
 **Calima Debug → Test Records** lets you create and delete simple records to

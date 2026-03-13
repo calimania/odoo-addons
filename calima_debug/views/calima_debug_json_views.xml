@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="calima_debug_json_view_form" model="ir.ui.view">
+        <field name="name">calima.debug.json.form</field>
+        <field name="model">calima.debug.json</field>
+        <field name="arch" type="xml">
+            <form string="System JSON" create="false" edit="false" delete="false">
+                <sheet>
+                    <group>
+                        <field name="generated_at"/>
+                        <field name="request_host"/>
+                    </group>
+                    <group string="Payload">
+                        <field name="payload_json" nolabel="1" colspan="2" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="calima_debug_json_action" model="ir.actions.act_window">
+        <field name="name">System JSON</field>
+        <field name="res_model">calima.debug.json</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="calima_debug_menu_info_json"
+              name="System JSON"
+              parent="calima_debug_menu_root"
+              action="calima_debug_json_action"
+              groups="base.group_system"
+              sequence="15"/>
+
+</odoo>
