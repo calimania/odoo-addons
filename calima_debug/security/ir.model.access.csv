@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_calima_test_user,calima.test user,model_calima_test,base.group_user,1,1,1,0
+access_calima_test_manager,calima.test manager,model_calima_test,base.group_system,1,1,1,1
+access_calima_debug_info_manager,calima.debug.info manager,model_calima_debug_info,base.group_system,1,1,1,1

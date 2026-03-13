@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- System Info wizard form view -->
+    <record id="calima_debug_info_view_form" model="ir.ui.view">
+        <field name="name">calima.debug.info.form</field>
+        <field name="model">calima.debug.info</field>
+        <field name="arch" type="xml">
+            <form string="System Info" create="false" edit="false" delete="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>System Information</h1>
+                        <p class="text-muted">
+                            Read-only snapshot of your Odoo environment.
+                            Useful for self-hosting diagnostics and support requests.
+                        </p>
+                    </div>
+
+                    <group string="Odoo">
+                        <field name="odoo_version"/>
+                        <field name="odoo_version_info"/>
+                        <field name="server_mode"/>
+                    </group>
+
+                    <group string="Python / OS">
+                        <field name="python_version"/>
+                        <field name="os_info"/>
+                    </group>
+
+                    <group string="Database">
+                        <field name="database_name"/>
+                    </group>
+
+                    <group string="Web / Network">
+                        <field name="base_url"/>
+                        <field name="server_timezone"/>
+                    </group>
+
+                    <group string="Modules">
+                        <field name="installed_modules_count"/>
+                    </group>
+
+                    <group string="Addon Paths">
+                        <field name="addons_paths" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action: open a fresh wizard each time -->
+    <record id="calima_debug_info_action" model="ir.actions.act_window">
+        <field name="name">System Info</field>
+        <field name="res_model">calima.debug.info</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Root menu -->
+    <menuitem id="calima_debug_menu_root"
+              name="Calima Debug"
+              sequence="100"/>
+
+    <!-- System Info menu item — restricted to system administrators -->
+    <menuitem id="calima_debug_menu_info"
+              name="System Info"
+              parent="calima_debug_menu_root"
+              action="calima_debug_info_action"
+              groups="base.group_system"
+              sequence="10"/>
+
+</odoo>
