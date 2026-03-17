@@ -49,16 +49,29 @@ class CalimaPublicApi(http.Controller):
         data = []
         for event in events:
             address = event.address_id
+            organizer = event.organizer_id if hasattr(event, 'organizer_id') else None
+            venue = event.venue_id if hasattr(event, 'venue_id') else address
+            tags = [tag.name for tag in getattr(event, 'tag_ids', [])] if hasattr(event, 'tag_ids') else []
+            seo_image = event.seo_image_url if hasattr(event, 'seo_image_url') else f'/web/image/event.event/{event.id}/image_1920'
+            slug = event.website_slug if hasattr(event, 'website_slug') else ''
+            canonical_url = event.website_url or ''
+            description = event.description or ''
             data.append({
                 'id': event.id,
                 'name': event.name,
                 'summary': event.subtitle or '',
+                'description': description,
                 'start_at': str(event.date_begin or ''),
                 'end_at': str(event.date_end or ''),
-                'event_url': event.website_url or '',
-                'image_url': f'/web/image/event.event/{event.id}/image_1920',
-                'city': address.city if address else '',
-                'country': address.country_id.name if address and address.country_id else '',
+                'event_url': canonical_url,
+                'image_url': seo_image,
+                'city': venue.city if venue else '',
+                'country': venue.country_id.name if venue and venue.country_id else '',
+                'tags': tags,
+                'organizer': organizer.name if organizer else '',
+                'venue': venue.name if venue and hasattr(venue, 'name') else '',
+                'slug': slug,
+                'canonical_url': canonical_url,
             })
 
         website_name = website.name if website else ''
