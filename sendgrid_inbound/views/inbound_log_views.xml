@@ -1,0 +1,95 @@
+<!-- @TODO: Restrict log access by company, assign emails to company if domains match -->
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_sendgrid_inbound_log_list" model="ir.ui.view">
+    <field name="name">sendgrid.inbound.log.list</field>
+    <field name="model">sendgrid.inbound.log</field>
+    <field name="arch" type="xml">
+      <list decoration-danger="state == 'error'" decoration-muted="state == 'fallback'">
+        <field name="subject"/>
+        <field name="from_addr"/>
+        <field name="to_addr"/>
+        <field name="routed_record_name" string="Routed To" optional="show"/>
+        <field name="routed_model" string="Model" optional="hide"/>
+        <field name="state" widget="badge"/>
+        <field name="create_date"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_sendgrid_inbound_log_form" model="ir.ui.view">
+    <field name="name">sendgrid.inbound.log.form</field>
+    <field name="model">sendgrid.inbound.log</field>
+    <field name="arch" type="xml">
+      <form string="SendGrid Inbound Log">
+        <header>
+          <button name="action_open_routed_record"
+                  string="Open Routed Record"
+                  type="object"
+                  class="btn-primary"
+                  invisible="not routed_model or not routed_res_id"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box"/>
+          <group>
+            <group string="Email">
+              <field name="subject" readonly="1"/>
+              <field name="from_addr" readonly="1"/>
+              <field name="to_addr" readonly="1"/>
+              <field name="message_id" readonly="1"/>
+            </group>
+            <group string="Routing">
+              <field name="state" readonly="1" widget="statusbar"/>
+              <field name="routed_model" readonly="1" string="Routed Model"/>
+              <field name="routed_record_name" readonly="1" string="Routed Record"/>
+              <field name="mail_message_id" readonly="1"/>
+              <field name="error_text" readonly="1" invisible="not error_text"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Email Content" name="email_content">
+              <group>
+                <field name="body_html" readonly="1" widget="html" nolabel="1" invisible="not body_html"/>
+                <field name="body_text" readonly="1" widget="text" nolabel="1" invisible="not body_text"/>
+              </group>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_sendgrid_inbound_log_search" model="ir.ui.view">
+    <field name="name">sendgrid.inbound.log.search</field>
+    <field name="model">sendgrid.inbound.log</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="subject"/>
+        <field name="from_addr"/>
+        <field name="to_addr"/>
+        <field name="routed_record_name" string="Routed Record"/>
+        <filter name="processed" string="Processed" domain="[('state','=','processed')]"/>
+        <filter name="errors" string="Errors" domain="[('state','=','error')]"/>
+        <filter name="unrouted" string="Unrouted" domain="[('routed_model','=',False)]"/>
+        <separator/>
+        <filter name="routed_crm" string="→ CRM" domain="[('routed_model','=','crm.lead')]"/>
+        <filter name="routed_helpdesk" string="→ Helpdesk" domain="[('routed_model','=','helpdesk.ticket')]"/>
+        <filter name="routed_project" string="→ Project Task" domain="[('routed_model','=','project.task')]"/>
+        <separator/>
+        <group expand="0" string="Group By">
+          <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
+          <filter name="group_routed_model" string="Routed To" context="{'group_by': 'routed_model'}"/>
+          <filter name="group_to_addr" string="To Address" context="{'group_by': 'to_addr'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="action_sendgrid_inbound_log" model="ir.actions.act_window">
+    <field name="name">Inbound Emails</field>
+    <field name="res_model">sendgrid.inbound.log</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id" ref="view_sendgrid_inbound_log_search"/>
+    <field name="context">{'search_default_processed': 1}</field>
+  </record>
+</odoo>
