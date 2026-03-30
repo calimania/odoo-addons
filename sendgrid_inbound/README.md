@@ -43,7 +43,7 @@ parse.yourdomain.com  MX  10  mx.sendgrid.net
 ### 4. Install the Module
 
 ```bash
-docker compose exec odoo odoo -d odoo -i sendgrid_inbound --stop-after-init --db_host=db
+odoo -d <database> -i sendgrid_inbound --stop-after-init
 ```
 
 ### 5. Configure Odoo Aliases (Optional but Recommended)
@@ -60,7 +60,7 @@ To route emails to specific models, create mail aliases:
 
 ```bash
 # Test with sample EML file
-curl -v -F "email=@erp-addons/sendgrid_inbound/sample.eml;type=message/rfc822" \
+curl -v -F "email=@sendgrid_inbound/sample.eml;type=message/rfc822" \
   -F "token=changeme" \
   http://localhost:8069/mail/sendgrid/inbound
 ```
@@ -70,6 +70,7 @@ curl -v -F "email=@erp-addons/sendgrid_inbound/sample.eml;type=message/rfc822" \
 ### UI
 - Go to **SendGrid Inbound** → **Inbound Emails**
 - View all received emails with status (processed/fallback/error)
+- See where each email was routed (CRM, helpdesk, project, etc.)
 - Open a record to see full details and attached raw message
 
 ### Server Logs
@@ -96,11 +97,12 @@ docker compose logs --no-color -f odoo | grep -i sendgrid
 
 ## Troubleshooting
 
-
- 401 Unauthorized | Token mismatch - verify `SENDGRID_INBOUND_SECRET` in container |
- 400 Missing email | SendGrid not sending raw MIME - check "POST raw" setting |
- Emails not routing | Create mail aliases in Odoo for your addresses |
- No records created | Check Odoo logs for `message_process` errors |
+| Symptom | Likely cause |
+| --- | --- |
+| 401 Unauthorized | Token mismatch. Verify `SENDGRID_INBOUND_SECRET` in the running environment. |
+| 400 Missing email | SendGrid is not sending raw MIME. Check the "POST raw" setting. |
+| Emails not routing | Create matching mail aliases in Odoo for the recipient addresses. |
+| No records created | Check Odoo logs for `message_process` errors. |
 
 ## Files
 

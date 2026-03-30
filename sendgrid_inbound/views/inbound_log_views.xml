@@ -1,5 +1,5 @@
-<!-- @TODO: Restrict log access by company, assign emails to company if domains match -->
 <?xml version="1.0" encoding="utf-8"?>
+<!-- @TODO: Restrict log access by company, assign emails to company if domains match -->
 <odoo>
   <record id="view_sendgrid_inbound_log_list" model="ir.ui.view">
     <field name="name">sendgrid.inbound.log.list</field>
