@@ -63,7 +63,7 @@
     <field name="name">sendgrid.inbound.log.search</field>
     <field name="model">sendgrid.inbound.log</field>
     <field name="arch" type="xml">
-      <search>
+      <search string="Inbound Emails">
         <field name="subject"/>
         <field name="from_addr"/>
         <field name="to_addr"/>
@@ -71,11 +71,9 @@
         <filter name="processed" string="Processed" domain="[('state','=','processed')]"/>
         <filter name="errors" string="Errors" domain="[('state','=','error')]"/>
         <filter name="unrouted" string="Unrouted" domain="[('routed_model','=',False)]"/>
-        <separator/>
-        <filter name="routed_crm" string="→ CRM" domain="[('routed_model','=','crm.lead')]"/>
-        <filter name="routed_helpdesk" string="→ Helpdesk" domain="[('routed_model','=','helpdesk.ticket')]"/>
-        <filter name="routed_project" string="→ Project Task" domain="[('routed_model','=','project.task')]"/>
-        <separator/>
+        <filter name="routed_crm" string="CRM" domain="[('routed_model','=','crm.lead')]"/>
+        <filter name="routed_helpdesk" string="Helpdesk" domain="[('routed_model','=','helpdesk.ticket')]"/>
+        <filter name="routed_project" string="Project Task" domain="[('routed_model','=','project.task')]"/>
         <group expand="0" string="Group By">
           <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
           <filter name="group_routed_model" string="Routed To" context="{'group_by': 'routed_model'}"/>
