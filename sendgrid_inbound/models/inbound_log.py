@@ -60,7 +60,7 @@ class SendgridInboundLog(models.Model):
                     log.routed_record_name = False
             else:
                 log.routed_model = False
-                log.routed_res_id = 0
+                log.routed_res_id = False
                 log.routed_record_name = False
 
     def action_open_routed_record(self):

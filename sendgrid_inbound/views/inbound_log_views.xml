@@ -74,11 +74,10 @@
         <filter name="routed_crm" string="CRM" domain="[('routed_model','=','crm.lead')]"/>
         <filter name="routed_helpdesk" string="Helpdesk" domain="[('routed_model','=','helpdesk.ticket')]"/>
         <filter name="routed_project" string="Project Task" domain="[('routed_model','=','project.task')]"/>
-        <group expand="0" string="Group By">
-          <filter name="group_state" string="State" context="{'group_by': 'state'}"/>
-          <filter name="group_routed_model" string="Routed To" context="{'group_by': 'routed_model'}"/>
-          <filter name="group_to_addr" string="To Address" context="{'group_by': 'to_addr'}"/>
-        </group>
+        <separator/>
+        <filter name="group_state" string="Group By State" context="{'group_by': 'state'}"/>
+        <filter name="group_routed_model" string="Group By Routed To" context="{'group_by': 'routed_model'}"/>
+        <filter name="group_to_addr" string="Group By To Address" context="{'group_by': 'to_addr'}"/>
       </search>
     </field>
   </record>
