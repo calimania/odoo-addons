@@ -50,9 +50,10 @@ class MarkketStore(models.Model):
         if not value:
             return False
         if isinstance(value, datetime):
-            return value
+            return value.replace(tzinfo=None)
         try:
-            return datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+            dt = datetime.fromisoformat(str(value).replace('Z', '+00:00'))
+            return dt.replace(tzinfo=None)
         except ValueError:
             return False
 
