@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_markket_listing_list" model="ir.ui.view">
+        <field name="name">markket.listing.list</field>
+        <field name="model">markket.listing</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="external_ref"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_markket_listing_form" model="ir.ui.view">
+        <field name="name">markket.listing.form</field>
+        <field name="model">markket.listing</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="external_ref"/>
+                        <field name="active"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_markket_listing_search" model="ir.ui.view">
+        <field name="name">markket.listing.search</field>
+        <field name="model">markket.listing</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="external_ref"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_markket_listing" model="ir.actions.act_window">
+        <field name="name">Listings</field>
+        <field name="res_model">markket.listing</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_markket_listing_search"/>
+    </record>
+
+    <menuitem id="menu_markket_root" name="Markket" sequence="10"/>
+    <menuitem id="menu_markket_listing" name="Listings" parent="menu_markket_root" action="action_markket_listing" sequence="20"/>
+</odoo>
