@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_markket_store_user,markket.store user,model_markket_store,markket.group_markket_user,1,1,1,1
+access_markket_store_manager,markket.store manager,model_markket_store,markket.group_markket_manager,1,1,1,1
+access_markket_store_url_user,markket.store.url user,model_markket_store_url,markket.group_markket_user,1,1,1,1
+access_markket_store_url_manager,markket.store.url manager,model_markket_store_url,markket.group_markket_manager,1,1,1,1
+access_markket_api_key_user,markket.api.key user,model_markket_api_key,markket.group_markket_user,1,0,0,0
+access_markket_api_key_manager,markket.api.key manager,model_markket_api_key,markket.group_markket_manager,1,1,1,1

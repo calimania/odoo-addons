@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_markket_store_list" model="ir.ui.view">
+        <field name="name">markket.store.list</field>
+        <field name="model">markket.store</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="store_slug"/>
+                <field name="owner_user_id"/>
+                <field name="markket_id"/>
+                <field name="markket_document_id"/>
+                <field name="locale"/>
+                <field name="active"/>
+                <field name="last_sync_status"/>
+                <field name="last_sync_at"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_markket_store_form" model="ir.ui.view">
+        <field name="name">markket.store.form</field>
+        <field name="model">markket.store</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_sync_from_public_api" type="object" string="Sync Public API" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <!-- User-editable: set these, then click Sync Public API -->
+                    <group string="Configuration">
+                        <group>
+                            <field name="name" placeholder="e.g. My Markket Store"/>
+                            <field name="store_slug" placeholder="e.g. markket"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="owner_user_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <!-- Filled automatically by Sync Public API -->
+                    <group string="Markket Data" readonly="1">
+                        <group>
+                            <field name="markket_id"/>
+                            <field name="markket_document_id"/>
+                            <field name="locale"/>
+                        </group>
+                        <group>
+                            <field name="stripe_customer_id"/>
+                            <field name="uuid"/>
+                        </group>
+                    </group>
+                    <group string="Description" readonly="1">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <group string="URLs" readonly="1">
+                        <field name="url_ids" nolabel="1">
+                            <list>
+                                <field name="sequence"/>
+                                <field name="label"/>
+                                <field name="url" widget="url"/>
+                                <field name="markket_url_id"/>
+                                <field name="active"/>
+                            </list>
+                        </field>
+                    </group>
+                    <group string="Sync Info" readonly="1">
+                        <group>
+                            <field name="markket_created_at"/>
+                            <field name="markket_updated_at"/>
+                            <field name="published_at"/>
+                        </group>
+                        <group>
+                            <field name="last_sync_at"/>
+                            <field name="last_sync_status"/>
+                            <field name="last_sync_message"/>
+                        </group>
+                    </group>
+                    <group string="Raw Payload" readonly="1">
+                        <field name="raw_payload" nolabel="1" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_markket_store_search" model="ir.ui.view">
+        <field name="name">markket.store.search</field>
+        <field name="model">markket.store</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="store_slug"/>
+                <field name="owner_user_id"/>
+                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_markket_store" model="ir.actions.act_window">
+        <field name="name">Stores</field>
+        <field name="res_model">markket.store</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_markket_store_search"/>
+    </record>
+
+    <menuitem id="menu_markket_root" name="Markket" sequence="10" groups="markket.group_markket_user"/>
+    <menuitem id="menu_markket_store" name="Stores" parent="menu_markket_root" action="action_markket_store" sequence="20" groups="markket.group_markket_user"/>
+</odoo>

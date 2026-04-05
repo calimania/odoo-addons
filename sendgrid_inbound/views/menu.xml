@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_sendgrid_inbound_root"
+              name="SendGrid Inbound"
+              sequence="40"
+              web_icon="mail,static/description/icon.png"
+              groups="sendgrid_inbound.group_sendgrid_inbound_viewer"/>
+
+    <menuitem id="menu_sendgrid_inbound_logs"
+              name="Inbound Logs"
+              parent="menu_sendgrid_inbound_root"
+              action="action_sendgrid_inbound_log"
+              sequence="10"
+              groups="sendgrid_inbound.group_sendgrid_inbound_viewer"/>
+</odoo>
