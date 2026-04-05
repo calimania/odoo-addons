@@ -9,6 +9,8 @@
                 <field name="store_slug"/>
                 <field name="owner_user_id"/>
                 <field name="markket_id"/>
+                <field name="markket_document_id"/>
+                <field name="locale"/>
                 <field name="active"/>
                 <field name="last_sync_status"/>
                 <field name="last_sync_at"/>
@@ -42,6 +44,17 @@
                     </group>
                     <group>
                         <field name="description"/>
+                    </group>
+                    <group string="URLs">
+                        <field name="url_ids" nolabel="1">
+                            <list editable="bottom">
+                                <field name="sequence"/>
+                                <field name="label"/>
+                                <field name="url"/>
+                                <field name="markket_url_id" readonly="1"/>
+                                <field name="active"/>
+                            </list>
+                        </field>
                     </group>
                     <group>
                         <group>

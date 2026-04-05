@@ -24,6 +24,7 @@ Future releases can extend this with synchronization to operational Odoo flows.
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/markket_store_views.xml',
+        'views/markket_store_url_views.xml',
         'views/markket_api_key_views.xml',
     ],
     'installable': True,

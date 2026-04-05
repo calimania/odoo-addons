@@ -35,6 +35,7 @@ class MarkketStore(models.Model):
     )
     last_sync_message = fields.Text(readonly=True)
     raw_payload = fields.Text(readonly=True)
+    url_ids = fields.One2many('markket.store.url', 'store_id', string='Store URLs')
 
     _sql_constraints = [
         (
@@ -57,7 +58,7 @@ class MarkketStore(models.Model):
 
     @api.model
     def _fetch_store_payload(self, slug):
-        query = urlencode({'filters[slug]': slug})
+        query = urlencode({'filters[slug]': slug, 'populate[]': 'URLS'})
         url = f'https://api.markket.place/api/stores?{query}'
         request = Request(url, headers={'Accept': 'application/json'})
 
@@ -77,6 +78,7 @@ class MarkketStore(models.Model):
 
         payload = self._fetch_store_payload(slug)
         attrs = payload if isinstance(payload, dict) else {}
+        urls = attrs.get('URLS') or []
 
         owner_id = owner_user_id or self.env.user.id
         now = fields.Datetime.now()
@@ -109,6 +111,18 @@ class MarkketStore(models.Model):
             record.write(values)
         else:
             record = self.create(values)
+
+        url_commands = [(5, 0, 0)]
+        for item in urls:
+            item_data = item if isinstance(item, dict) else {}
+            url_commands.append((0, 0, {
+                'markket_url_id': item_data.get('id') or 0,
+                'label': item_data.get('Label') or item_data.get('label') or 'Link',
+                'url': item_data.get('URL') or item_data.get('url') or '',
+                'active': True,
+            }))
+
+        record.write({'url_ids': url_commands})
 
         return record
 
