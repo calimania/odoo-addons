@@ -21,8 +21,10 @@ Future releases can extend this with synchronization to operational Odoo flows.
     'license': 'LGPL-3',
     'depends': ['base'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
-        'views/markket_listing_views.xml',
+        'views/markket_store_views.xml',
+        'views/markket_api_key_views.xml',
     ],
     'installable': True,
     'application': True,
