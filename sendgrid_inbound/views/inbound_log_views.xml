@@ -63,7 +63,7 @@
     <field name="name">sendgrid.inbound.log.search</field>
     <field name="model">sendgrid.inbound.log</field>
     <field name="arch" type="xml">
-      <search string="Inbound Emails">
+      <search>
         <field name="subject"/>
         <field name="from_addr"/>
         <field name="to_addr"/>
