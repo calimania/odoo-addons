@@ -27,49 +27,57 @@
                     <button name="action_sync_from_public_api" type="object" string="Sync Public API" class="oe_highlight"/>
                 </header>
                 <sheet>
-                    <group>
+                    <!-- User-editable: set these, then click Sync Public API -->
+                    <group string="Configuration">
                         <group>
-                            <field name="name"/>
-                            <field name="store_slug"/>
-                            <field name="owner_user_id"/>
+                            <field name="name" placeholder="e.g. My Markket Store"/>
+                            <field name="store_slug" placeholder="e.g. markket"/>
                             <field name="active"/>
                         </group>
                         <group>
-                            <field name="markket_id" readonly="1"/>
-                            <field name="markket_document_id" readonly="1"/>
-                            <field name="locale" readonly="1"/>
-                            <field name="stripe_customer_id" readonly="1"/>
-                            <field name="uuid" readonly="1"/>
+                            <field name="owner_user_id" readonly="1"/>
                         </group>
                     </group>
-                    <group>
-                        <field name="description"/>
+                    <!-- Filled automatically by Sync Public API -->
+                    <group string="Markket Data" readonly="1">
+                        <group>
+                            <field name="markket_id"/>
+                            <field name="markket_document_id"/>
+                            <field name="locale"/>
+                        </group>
+                        <group>
+                            <field name="stripe_customer_id"/>
+                            <field name="uuid"/>
+                        </group>
                     </group>
-                    <group string="URLs">
+                    <group string="Description" readonly="1">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <group string="URLs" readonly="1">
                         <field name="url_ids" nolabel="1">
-                            <list editable="bottom">
+                            <list>
                                 <field name="sequence"/>
                                 <field name="label"/>
-                                <field name="url"/>
-                                <field name="markket_url_id" readonly="1"/>
+                                <field name="url" widget="url"/>
+                                <field name="markket_url_id"/>
                                 <field name="active"/>
                             </list>
                         </field>
                     </group>
-                    <group>
+                    <group string="Sync Info" readonly="1">
                         <group>
-                            <field name="markket_created_at" readonly="1"/>
-                            <field name="markket_updated_at" readonly="1"/>
-                            <field name="published_at" readonly="1"/>
+                            <field name="markket_created_at"/>
+                            <field name="markket_updated_at"/>
+                            <field name="published_at"/>
                         </group>
                         <group>
-                            <field name="last_sync_at" readonly="1"/>
-                            <field name="last_sync_status" readonly="1"/>
-                            <field name="last_sync_message" readonly="1"/>
+                            <field name="last_sync_at"/>
+                            <field name="last_sync_status"/>
+                            <field name="last_sync_message"/>
                         </group>
                     </group>
-                    <group>
-                        <field name="raw_payload" readonly="1" widget="text"/>
+                    <group string="Raw Payload" readonly="1">
+                        <field name="raw_payload" nolabel="1" widget="text"/>
                     </group>
                 </sheet>
             </form>
